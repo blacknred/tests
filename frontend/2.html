@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #canvas {
+            background-color: #eee;
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const canvas = document.querySelector('#canvas');
+            const context = canvas.getContext('2d');
+            const width = context.canvas.width;
+            const height = context.canvas.height;
+            context.fillStyle = "#FF0000";
+            context.lineWidth = "4";
+            context.strokeStyle = 'black';
+
+            context.beginPath();
+
+            // circle
+            context.arc(width * 0.1, height * 0.9, 50, 0, 2 * Math.PI, false);
+
+            // triangle
+            context.moveTo((width * 0.1) + 50, height * 0.15);
+            context.lineTo((width * 0.1), (height * 0.15) - 80);
+            context.lineTo((width * 0.1) - 50, height * 0.15);
+
+            // rectangle
+            context.rect(width * 0.8, height * 0.85, 120, 80);
+
+            // square
+            context.rect(width * 0.85, height * 0.05, 80, 80);
+            
+            context.fill();
+            context.stroke();
+            context.closePath();
+
+        };
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+</body>
+
+</html>

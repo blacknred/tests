@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        #data {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #data div {
+            height: auto;
+            width: 10em;
+            margin: 1em;
+            padding: 0.5em 1em;
+            border: 1px solid #eee;
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const SRC = 'http://jsonplaceholder.typicode.com/posts';
+            const fetchJson = () => {
+                return fetch(SRC)
+                    .then(resp => resp.json())
+                    .catch(err => console.log(err))
+            }
+            document.getElementById('button').onclick = async () => {
+                const data = await fetchJson();
+                if (data) {
+                    data.map((post) => {
+                        const el = document.createElement('div');
+                        const title = document.createElement('b')
+                        title.innerHTML = post.title;
+                        const body = document.createElement('p')
+                        body.innerText = post.body;
+                        el.id = post.id;
+                        el.append(title);
+                        el.append(body)
+                        document.getElementById('data').append(el)
+                    })
+                }
+
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <button id='button'>Fetch data</button>
+    <br/>
+    <div id='data'></div>
+</body>
+
+</html>

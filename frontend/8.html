@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container {
+            display: flex;
+        }
+        .th {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            border: 1px solid green;
+            margin: 1em;
+            background-color: coral;
+            opacity: 0;
+            -webkit-transition: opacity 1s ease-in;
+            -moz-transition: opacity 1s ease-in;
+            -o-transition: opacity 1s ease-in;
+            -ms-transition: opacity 1s ease-in;
+            transition: opacity 1s ease-in;
+        }
+
+        .th.active {
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const btn = document.getElementById('btn')
+
+            btn.onclick = () => {
+                const elems = document.querySelectorAll('.th');
+                elems.forEach(elem => elem.classList.toggle('active'));
+                if (btn.value === 'hide') {
+                    btn.value = 'show'
+                } else {
+                    btn.value = 'hide';
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" id="btn" value="show">
+    <div class="container">
+        <div class="th"></div>
+        <div class="th"></div>
+        <div class="th"></div>
+    </div>
+</body>
+
+</html>

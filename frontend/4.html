@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+        window.onload = () => {            
+            class User {
+                constructor() {
+                    this._canEditEverything = false;
+                }
+                get canEditEverything() { return this._canEditEverything; }
+            }
+
+            class Administrator extends User {
+                constructor() {
+                    super();
+                    this._canEditEverything = true;
+                }
+            }
+
+            let user = new User();
+            let admin = new Administrator();
+            console.log(user.canEditEverything);
+            console.log(admin.canEditEverything);
+        };
+    </script>
+</head>
+
+<body>
+    
+</body>
+
+</html>

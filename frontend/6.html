@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        #data {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #data div {
+            height: auto;
+            width: 10em;
+            margin: 1em;
+            padding: 0.5em 1em;
+            border: 1px solid #eee;
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            const ADDRESS = 'wss://echo.websocket.org';
+            const mirrorTestArr = [{
+                userId: 1,
+                id: 1,
+                title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+            },
+            {
+                userId: 1,
+                id: 2,
+                title: "qui est esse",
+                body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+            },
+            {
+                userId: 1,
+                id: 3,
+                title: "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+                body: "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
+            }];
+
+            window.WebSocket = window.WebSocket || window.MozWebSocket;
+            if (!window.WebSocket) {
+                console.log('Sorry, but your browser doesn\'t support WebSocket.');
+                return;
+            }
+            // open connection
+            const ws = new WebSocket(ADDRESS);
+
+            ws.onopen = () => ws.send(JSON.stringify(mirrorTestArr));
+
+            ws.onmessage = message => {
+                ws.close();
+                const data = JSON.parse(message.data);
+                data.map((post) => {
+                    const el = document.createElement('div');
+                    const title = document.createElement('b')
+                    title.innerHTML = post.title;
+                    const body = document.createElement('p')
+                    body.innerText = post.body;
+                    el.id = post.id;
+                    el.append(title);
+                    el.append(body)
+                    document.getElementById('data').append(el)
+                })
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <div id='data'></div>
+</body>
+
+</html>

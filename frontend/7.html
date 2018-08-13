@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .parent {
+            margin: 0 auto;
+            width: 80vw;
+            height: 20em;
+            background: #bbb;
+            position: relative;
+        }
+
+        .center {
+            width: 50%;
+            height: 80%;
+            background: #eee;
+        }
+
+        #css {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <script>
+        window.onload = () => {
+            var parent = document.querySelector('#js')
+            var center = document.querySelector('#js .center')
+
+            center.style.position = 'absolute';
+            center.style.left = (parent.clientWidth - center.getBoundingClientRect().width ) / 2 + 'px';
+            center.style.top = (parent.clientHeight - center.getBoundingClientRect().height ) / 2 + 'px';
+        };
+    </script>
+
+</head>
+
+<body>
+    <p>JS Centering</p>
+    <div class="parent" id='js'>
+        <div class="center"></div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <p>CSS Centering</p>
+    <div class="parent" id='css'>
+        <div class="center"></div>
+    </div>
+</body>
+
+</html>
